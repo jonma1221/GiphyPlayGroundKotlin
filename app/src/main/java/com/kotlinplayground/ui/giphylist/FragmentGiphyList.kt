@@ -7,6 +7,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.kotlinplayground.R
 import com.kotlinplayground.data.model.GiphyData
 import com.kotlinplayground.data.source.GiphyDataSourceImpl
@@ -83,6 +84,7 @@ class FragmentGiphyList: Fragment(), GiphyListContract.View {
                 }
 
                 override fun onNext(s: String) {
+                    list_progress.visibility = View.GONE
                     mPresenter.searchGiphy(s, 0)
                 }
 
@@ -95,7 +97,7 @@ class FragmentGiphyList: Fragment(), GiphyListContract.View {
     }
 
     fun showProgress(){
-
+        list_progress.visibility = View.VISIBLE
     }
 
     private fun setupPresenter() {
@@ -112,6 +114,6 @@ class FragmentGiphyList: Fragment(), GiphyListContract.View {
     }
 
     override fun onError() {
-
+        Toast.makeText(context, "error", Toast.LENGTH_SHORT).show()
     }
 }

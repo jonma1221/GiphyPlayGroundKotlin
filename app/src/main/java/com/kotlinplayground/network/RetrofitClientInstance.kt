@@ -45,7 +45,7 @@ object RetrofitClientInstance {
             connectTimeout(10, TimeUnit.SECONDS)
             writeTimeout(10, TimeUnit.SECONDS)
             readTimeout(10, TimeUnit.SECONDS)
-//            cache(Cache(App.applicationContext().cacheDir, cacheSize.toLong()))
+            cache(Cache(App.applicationContext().cacheDir, cacheSize.toLong()))
             addInterceptor(createHttpLoggingInterceptor())
             addInterceptor(ApiKeyInterceptor())
 //            addInterceptor(OfflineInterceptor())
