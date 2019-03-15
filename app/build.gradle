@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.kotlinplayground"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            it.buildConfigField 'String', 'GiphyApiKey', GiphyApiKey
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:${libraries.supportVersion}"
+    implementation "com.android.support.constraint:constraint-layout:${libraries.constraint}"
+    implementation "com.android.support:recyclerview-v7:${libraries.supportVersion}"
+    implementation "com.android.support:support-v4:${libraries.supportVersion}"
+    implementation "com.android.support:design:${libraries.supportVersion}"
+
+    // rxjava
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
+
+    // RxAndroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
+    // butterknife
+    implementation "com.jakewharton:butterknife:${libraries.butterknife}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${libraries.butterknife}"
+
+    //image loading
+    implementation "com.github.bumptech.glide:glide:${libraries.glide}"
+
+    //parsing
+    implementation "com.google.code.gson:gson:${libraries.gson}"
+
+    //networking
+    implementation "com.squareup.retrofit2:retrofit:${libraries.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${libraries.retrofitConvertor}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${libraries.retrofitLogger}"
+
+    // RxAndroid with retrofit.
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
+    //Testing
+    testImplementation "junit:junit:${libraries.junit}"
+    testImplementation 'org.mockito:mockito-core:2.2.1'
+    androidTestImplementation "com.android.support.test:runner:${libraries.runner}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${libraries.expresso}"
+}
