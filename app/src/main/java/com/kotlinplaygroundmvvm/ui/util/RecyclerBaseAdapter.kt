@@ -3,7 +3,7 @@ package com.kotlinplaygroundmvvm.ui.util
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 
-abstract class RecyclerBaseAdapter<T, L : RecyclerBaseAdapter.BaseRecyclerListener>(val items: MutableList<T>) : RecyclerView.Adapter<BaseHolder<T, L>>() {
+abstract class RecyclerBaseAdapter<T, L : RecyclerBaseAdapter.BaseRecyclerListener>(private val items: MutableList<T>) : RecyclerView.Adapter<BaseHolder<T, L>>() {
 
     fun replace(items: List<T>){
         this.items.clear()
@@ -17,7 +17,7 @@ abstract class RecyclerBaseAdapter<T, L : RecyclerBaseAdapter.BaseRecyclerListen
         notifyItemRangeInserted(origSize, this.items.size)
     }
 
-    override abstract fun onCreateViewHolder(p0: ViewGroup, p1: Int): BaseHolder<T, L>
+    abstract override fun onCreateViewHolder(p0: ViewGroup, p1: Int): BaseHolder<T, L>
 
     override fun getItemCount(): Int = items.size
 

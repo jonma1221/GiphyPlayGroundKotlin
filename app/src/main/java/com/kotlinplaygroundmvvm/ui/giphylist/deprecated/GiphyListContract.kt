@@ -1,12 +1,12 @@
-package com.kotlinplaygroundmvvm.ui.giphylist
+package com.kotlinplaygroundmvvm.ui.giphylist.deprecated
 
-import com.kotlinplaygroundmvvm.data.model.GiphyData
+import com.kotlinplaygroundmvvm.data.model.giphy.GiphyObject
 import com.kotlinplaygroundmvvm.ui.util.BasePresenter
 
 interface GiphyListContract {
     interface View{
-        fun onTrendingLoaded(list: List<GiphyData>)
-        fun onSearchResultLoaded(searchResult: List<GiphyData>)
+        fun onTrendingLoaded(list: List<GiphyObject>)
+        fun onSearchResultLoaded(searchResult: List<GiphyObject>)
         fun onError()
     }
 

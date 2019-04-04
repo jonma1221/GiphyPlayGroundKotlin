@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -30,23 +30,25 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:${libraries.supportVersion}"
     implementation "com.android.support.constraint:constraint-layout:${libraries.constraint}"
-    implementation "com.android.support:recyclerview-v7:${libraries.supportVersion}"
     implementation "com.android.support:support-v4:${libraries.supportVersion}"
     implementation "com.android.support:design:${libraries.supportVersion}"
 
+    // room
+    implementation "android.arch.persistence.room:runtime:${libraries.roomVersion}"
+    kapt  "android.arch.persistence.room:compiler:${libraries.roomVersion}"
+
+    // RxJava support for Room
+    implementation "android.arch.persistence.room:rxjava2:${libraries.roomVersion}"
+
     // Lifecycle components
-    implementation 'android.arch.lifecycle:extensions:1.1.1'
-    annotationProcessor 'android.arch.lifecycle:compiler:1.1.1'
+    implementation "android.arch.lifecycle:extensions:${libraries.lifeCycle}"
+    kapt  "android.arch.lifecycle:compiler:${libraries.lifeCycle}"
 
     // rxjava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
 
     // RxAndroid
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-
-    // butterknife
-    implementation "com.jakewharton:butterknife:${libraries.butterknife}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${libraries.butterknife}"
 
     //image loading
     implementation "com.github.bumptech.glide:glide:${libraries.glide}"
@@ -59,12 +61,21 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${libraries.retrofitConvertor}"
     implementation "com.squareup.okhttp3:logging-interceptor:${libraries.retrofitLogger}"
 
-    // RxAndroid with retrofit.
+    // RxAndroid adapter for retrofit.
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${libraries.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${libraries.dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${libraries.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${libraries.dagger}"
 
     //Testing
     testImplementation "junit:junit:${libraries.junit}"
-    testImplementation 'org.mockito:mockito-core:2.2.1'
+    testImplementation "org.mockito:mockito-core:${libraries.mockito}"
     androidTestImplementation "com.android.support.test:runner:${libraries.runner}"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${libraries.expresso}"
+
+    // Stetho
+    implementation "com.facebook.stetho:stetho-okhttp3:${libraries.stetho}"
 }

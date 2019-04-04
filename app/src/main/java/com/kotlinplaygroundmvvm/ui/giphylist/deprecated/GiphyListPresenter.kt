@@ -1,13 +1,14 @@
-package com.kotlinplaygroundmvvm.ui.giphylist
+package com.kotlinplaygroundmvvm.ui.giphylist.deprecated
 
-import com.kotlinplaygroundmvvm.data.source.GiphyDataSource
+import com.kotlinplaygroundmvvm.data.source.network.GiphyDataSource
 import com.kotlinplaygroundmvvm.ui.util.Schedulers.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 
 class GiphyListPresenter(
     private val mGiphyDataSource: GiphyDataSource,
     private val mSchedulerProvider: SchedulerProvider,
-    private val mGiphyListView: GiphyListContract.View)
+    private val mGiphyListView: GiphyListContract.View
+)
     : GiphyListContract.Presenter {
 
     val compositeDisposable: CompositeDisposable = CompositeDisposable()

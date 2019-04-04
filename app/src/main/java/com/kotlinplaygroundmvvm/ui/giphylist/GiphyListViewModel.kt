@@ -2,15 +2,15 @@ package com.kotlinplaygroundmvvm.ui.giphylist
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.kotlinplaygroundmvvm.data.model.GiphyData
-import com.kotlinplaygroundmvvm.data.source.GiphyRepository
-import com.kotlinplaygroundmvvm.ui.util.Schedulers.SchedulerProvider
+import android.util.Log
+import com.kotlinplaygroundmvvm.data.model.giphy.GiphyObject
+import com.kotlinplaygroundmvvm.data.source.repository.GiphyRepository
 import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
-class GiphyListViewModel(val giphyRepository: GiphyRepository,
-                         val mSchedulerProvider: SchedulerProvider): ViewModel() {
+class GiphyListViewModel @Inject constructor(val giphyRepository: GiphyRepository): ViewModel() {
 
-    private val giphyList = MutableLiveData<List<GiphyData>>()
+    private val giphyList = MutableLiveData<List<GiphyObject>>()
 
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -18,11 +18,9 @@ class GiphyListViewModel(val giphyRepository: GiphyRepository,
         compositeDisposable.clear()
 
         val disposable = giphyRepository.getTrending(offset)
-            .subscribeOn(mSchedulerProvider.io())
-            .observeOn(mSchedulerProvider.main())
             .subscribe(
-                { data -> giphyList.value = data },
-                { error -> }
+                { data -> giphyList.postValue(data)},
+                { error -> Log.d("here", error.localizedMessage)}
             )
         compositeDisposable.addAll(disposable)
     }
@@ -30,15 +28,13 @@ class GiphyListViewModel(val giphyRepository: GiphyRepository,
     fun searchGiphy(query: String, offset: Int) {
         compositeDisposable.clear()
         val disposable = giphyRepository.searchGiphy(query, offset)
-            .subscribeOn(mSchedulerProvider.io())
-            .observeOn(mSchedulerProvider.main())
             .subscribe(
                 { giphyList.value = it },
                 { error ->  })
         compositeDisposable.addAll(disposable)
     }
 
-    fun getGiphyListLiveData(): MutableLiveData<List<GiphyData>> = giphyList
+    fun getGiphyListLiveData(): MutableLiveData<List<GiphyObject>> = giphyList
 
     override fun onCleared() {
         super.onCleared()

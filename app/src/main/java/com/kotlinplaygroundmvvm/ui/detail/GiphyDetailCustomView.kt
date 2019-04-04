@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.kotlinplaygroundmvvm.R
-import com.kotlinplaygroundmvvm.data.model.GiphyData
+import com.kotlinplaygroundmvvm.data.model.giphy.GiphyObject
 import kotlinx.android.synthetic.main.giphy_detail_layout.view.*
 
 class GiphyDetailCustomView: ConstraintLayout {
@@ -16,7 +16,7 @@ class GiphyDetailCustomView: ConstraintLayout {
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    var mGiphyData: GiphyData? = null
+    var mGiphyObject: GiphyObject? = null
 
     init {
         View.inflate(context, R.layout.giphy_detail_layout, this)
