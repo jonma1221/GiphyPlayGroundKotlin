@@ -54,7 +54,9 @@ class GiphyRepositoryImpl @Inject constructor(
     }
 
     fun getTrendingFromDB(): Observable<List<GiphyObject>>{
-        return db.giphyObjDao().getGiphyList().toObservable()
+        return db.giphyObjDao()
+            .getGiphyList()
+            .toObservable()
             .subscribeOn(mSchedulerProvider.io())
 
     }

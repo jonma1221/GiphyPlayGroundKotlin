@@ -36,7 +36,7 @@ ext{
             lifeCycle:"1.1.1",
             glide: "4.8.0",
             junit: "4.12",
-            mockito: "2.2.1",
+            mockito: "2.8.9",
             runner: "1.0.2",
             expresso: "3.0.2",
             butterknife      : "8.0.0",

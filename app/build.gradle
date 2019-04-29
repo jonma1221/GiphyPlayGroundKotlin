@@ -69,6 +69,9 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:${libraries.dagger}"
     kapt "com.google.dagger:dagger-android-processor:${libraries.dagger}"
     kapt "com.google.dagger:dagger-compiler:${libraries.dagger}"
+//    kaptTest 'com.google.dagger:dagger-compiler:2.21'
+    // this is needed for Kotlin since Kotlin classes and functions are final by default
+    testImplementation 'org.mockito:mockito-inline:2.8.47'
 
     //Testing
     testImplementation "junit:junit:${libraries.junit}"
