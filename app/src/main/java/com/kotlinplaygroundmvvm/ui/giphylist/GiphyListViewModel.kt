@@ -20,7 +20,7 @@ class GiphyListViewModel @Inject constructor(val giphyRepository: GiphyRepositor
         val disposable = giphyRepository.getTrending(offset)
             .subscribe(
                 { data -> giphyList.postValue(data)},
-                { error -> Log.d("here", error.localizedMessage)}
+                { error -> }
             )
         compositeDisposable.addAll(disposable)
     }
