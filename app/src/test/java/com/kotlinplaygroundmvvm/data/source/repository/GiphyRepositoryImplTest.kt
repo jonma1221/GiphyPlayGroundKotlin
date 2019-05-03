@@ -42,6 +42,7 @@ class GiphyRepositoryImplTest{
 
     @Test
     fun getTrendingApi_success(){
+        // mock the api response
         `when`(remoteDataSource.getTrending(1)).thenReturn(
             Single.just(ArgumentMatchers.anyList<GiphyObject>()))
 
@@ -51,13 +52,14 @@ class GiphyRepositoryImplTest{
 
     @Test
     fun getTrendingDb_success(){
+        // mock the results from the dao query when getTrendingFromDb is called
         `when`(db.giphyObjDao()).thenReturn(dao)
         val data = listOf<GiphyObject>()
         `when`(db.giphyObjDao().getGiphyList()).thenReturn(
             Single.just(data))
 
         repositoryImpl.getTrendingFromDB()
-        verify(db.giphyObjDao()).getGiphyList()
+        verify(dao).getGiphyList()
     }
 
     @Test

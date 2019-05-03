@@ -76,6 +76,7 @@ dependencies {
     //Testing
     testImplementation "junit:junit:${libraries.junit}"
     testImplementation "org.mockito:mockito-core:${libraries.mockito}"
+    testImplementation "android.arch.core:core-testing:1.1.1" // Test helpers for LiveData
     androidTestImplementation "com.android.support.test:runner:${libraries.runner}"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${libraries.expresso}"
 
