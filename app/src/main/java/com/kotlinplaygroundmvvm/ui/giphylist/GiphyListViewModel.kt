@@ -1,5 +1,6 @@
 package com.kotlinplaygroundmvvm.ui.giphylist
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
@@ -10,7 +11,8 @@ import javax.inject.Inject
 
 class GiphyListViewModel @Inject constructor(val giphyRepository: GiphyRepository): ViewModel() {
 
-    private val giphyList = MutableLiveData<List<GiphyObject>>()
+    private val _giphyList = MutableLiveData<List<GiphyObject>>()
+    val giphyList: LiveData<List<GiphyObject>> = _giphyList
 
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -19,7 +21,7 @@ class GiphyListViewModel @Inject constructor(val giphyRepository: GiphyRepositor
 
         val disposable = giphyRepository.getTrending(offset)
             .subscribe(
-                { data -> giphyList.postValue(data)},
+                { data -> _giphyList.postValue(data)},
                 { error -> }
             )
         compositeDisposable.addAll(disposable)
@@ -29,12 +31,10 @@ class GiphyListViewModel @Inject constructor(val giphyRepository: GiphyRepositor
         compositeDisposable.clear()
         val disposable = giphyRepository.searchGiphy(query, offset)
             .subscribe(
-                { giphyList.value = it },
+                { _giphyList.value = it },
                 { error ->  })
         compositeDisposable.addAll(disposable)
     }
-
-    fun getGiphyListLiveData(): MutableLiveData<List<GiphyObject>> = giphyList
 
     override fun onCleared() {
         super.onCleared()

@@ -135,7 +135,7 @@ class FragmentGiphyList: Fragment() {
 
     //todo - figure out how to resolve the import conflicts
     private fun observeGiphyTrending() {
-        giphyListViewModel.getGiphyListLiveData().observe(this,
+        giphyListViewModel.giphyList.observe(this,
             android.arch.lifecycle.Observer { it?.let {
                 Log.d("here", "${it.size}")
                 giphyListAdapter.replace(it) } })
