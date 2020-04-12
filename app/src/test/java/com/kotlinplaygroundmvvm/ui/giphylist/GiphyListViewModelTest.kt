@@ -63,10 +63,10 @@ class GiphyListViewModelTest {
 
         // mock observer and let viewmodel observe
         val observer =  mock(Observer::class.java) as Observer<List<GiphyObject>>
-        viewModel.getGiphyListLiveData().observeForever(observer)
+        viewModel.giphyList.observeForever(observer)
         viewModel.getTrendingGiphyList(1)
 //        verify(observer).onChanged(data)
-        assertNotNull(viewModel.getGiphyListLiveData().value)
+        assertNotNull(viewModel.giphyList.value)
     }
 
     @Test
@@ -80,7 +80,7 @@ class GiphyListViewModelTest {
 
         // mock observer and let viewmodel observe
         val observer =  mock(Observer::class.java) as Observer<List<GiphyObject>>
-        viewModel.getGiphyListLiveData().observeForever(observer)
+        viewModel.giphyList.observeForever(observer)
         viewModel.getTrendingGiphyList(1)
         verify(observer, never()).onChanged(ArgumentMatchers.any())
     }
